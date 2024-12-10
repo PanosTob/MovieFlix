@@ -97,4 +97,6 @@ dependencies {
     implementation(libs.squareup.retrofit.moshi)
 
     implementation(libs.jetbrains.kotlinx.serialization.json)
+
+    implementation(libs.androidx.security.crypto.ktx)
 }
