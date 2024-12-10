@@ -27,6 +27,14 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
+    flavorDimensions += listOf("env")
+    productFlavors {
+        create("dev") {
+            dimension = "env"
+            buildConfigField("String", "TMDB_JSON_API_BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -37,6 +45,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
