@@ -17,6 +17,6 @@ class MoviesApiInterceptor @Inject constructor() : Interceptor {
     companion object {
         private const val MOVIES_AUTHORIZATION_HEADER = "Authorization"
         private const val HEADER_USER_AGENT = "User-Agent"
-        private const val MOVIES_AUTHORIZATION_TOKEN = "f82912e5c27b184e90326831b51734bc"
+        private const val MOVIES_AUTHORIZATION_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNDg4MzQ0MzZlODA1NjhkYjg3MmZiZWIyYzA4YzZhNyIsIm5iZiI6MTczMzg0NTEzMC42Nywic3ViIjoiNjc1ODYwOGFlZWRlYzIyZDhhZWMwYzk4Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.KFzLblwhKkAIS4gORw0yd4I4hc-9ppT5G58NCOZoBZo"
     }
 }
