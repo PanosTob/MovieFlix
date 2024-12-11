@@ -17,7 +17,7 @@ class PopularMoviesMapper @Inject constructor() {
                 title = remoteMovie.title ?: "",
                 imagePath = BuildConfig.TMDB_JSON_API_IMAGE_URL + remoteMovie.imagePath,
                 date = remoteMovie.date ?: "",
-                starRating = remoteMovie.starRating?.times(5)?.div(10)
+                starRating = remoteMovie.starRating?.div(2)
             )
         }
     }

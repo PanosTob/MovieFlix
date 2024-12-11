@@ -18,7 +18,7 @@ class MovieDetailsMapper @Inject constructor(
             imagePath = BuildConfig.TMDB_JSON_API_IMAGE_URL + response.imagePath,
             genres = mapGenre(response.genres),
             releaseDate = response.date ?: "",
-            starRating = response.starRating?.times(5)?.div(10),
+            starRating = response.starRating?.div(2),
             runtime = response.runtime ?: 0,
             description = response.description ?: "",
             cast = movieCastMapper(response.credits?.cast),
