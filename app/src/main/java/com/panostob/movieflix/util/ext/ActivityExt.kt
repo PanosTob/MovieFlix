@@ -2,7 +2,7 @@ package com.panostob.movieflix.util.ext
 
 import android.app.Activity
 import android.content.Intent
-import com.panostob.movieflix.AppActivity
+import com.panostob.movieflix.ui.app.AppActivity
 
 fun Activity.restartApp() {
     finishAffinity()

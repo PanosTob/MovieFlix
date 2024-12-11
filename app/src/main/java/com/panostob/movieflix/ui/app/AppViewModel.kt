@@ -16,14 +16,14 @@ class AppViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): BaseViewModel() {
 
-    init {
-        initPoD()
-    }
-
     private val _uiState = MutableStateFlow(AppUiState())
     val uiState = _uiState.asStateFlow()
 
     private var isAlreadyCreated by SaveStateDelegate<Boolean>(savedStateHandle = savedStateHandle, key = SAVE_STATE_APP)
+
+    init {
+        initPoD()
+    }
 
     private fun initPoD() {
         // catch PoD case - restart app

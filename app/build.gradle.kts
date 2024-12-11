@@ -33,6 +33,7 @@ android {
         create("dev") {
             dimension = "env"
             buildConfigField("String", "TMDB_JSON_API_BASE_URL", "\"https://api.themoviedb.org/3/\"")
+            buildConfigField("String", "TMDB_JSON_API_IMAGE_URL", "\"https://image.tmdb.org/t/p/w300\"")
         }
     }
     compileOptions {
