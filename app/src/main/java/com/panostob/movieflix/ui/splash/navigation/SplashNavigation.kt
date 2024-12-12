@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object SplashRoute : NavigationRoute()
 
-internal fun NavGraphBuilder.splashScreen(
+fun NavGraphBuilder.splashScreen(
     navigateToRoute: (NavigationRoute) -> Unit
 ) {
     composable<SplashRoute> {

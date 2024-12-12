@@ -1,12 +1,12 @@
 package com.panostob.movieflix.di.movies
 
 import com.panostob.movieflix.BuildConfig
-import com.panostob.movieflix.data.movies.datasource.MoviesDataSource
+import com.panostob.movieflix.data.movies.datasource.MoviesRemoteDataSource
 import com.panostob.movieflix.data.movies.repository.MoviesRepositoryImpl
 import com.panostob.movieflix.di.qualifier.MoviesOkHttpClient
 import com.panostob.movieflix.domain.movies.repository.MoviesRepository
 import com.panostob.movieflix.framework.movies.MoviesApi
-import com.panostob.movieflix.framework.movies.datasource.MoviesDataSourceImpl
+import com.panostob.movieflix.framework.movies.datasource.MoviesRemoteDataSourceImpl
 import com.panostob.movieflix.util.network.interceptor.MoviesApiInterceptor
 import dagger.Binds
 import dagger.Module
@@ -15,6 +15,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.ConnectionSpec
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -29,6 +30,7 @@ object MoviesModule {
     @Provides
     @MoviesOkHttpClient
     fun provideMoviesOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
         moviesApiInterceptor: MoviesApiInterceptor,
         connectionSpec: ConnectionSpec
     ): OkHttpClient {
@@ -36,9 +38,12 @@ object MoviesModule {
             .connectTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
-            .connectionSpecs(listOf(connectionSpec))
             .addInterceptor(moviesApiInterceptor)
-
+            .connectionSpecs(listOf(connectionSpec)).apply {
+                if (BuildConfig.DEBUG) {
+                    addNetworkInterceptor(httpLoggingInterceptor)
+                }
+            }
         return okHttpClient.build()
     }
 
@@ -65,5 +70,5 @@ interface MoviesBindsModule {
     fun bindMoviesRepositoryImpl(repository: MoviesRepositoryImpl): MoviesRepository
 
     @Binds
-    fun bindMoviesDataSourceImpl(dataSource: MoviesDataSourceImpl): MoviesDataSource
+    fun bindMoviesDataSourceImpl(dataSource: MoviesRemoteDataSourceImpl): MoviesRemoteDataSource
 }

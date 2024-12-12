@@ -1,6 +1,6 @@
 package com.panostob.movieflix.framework.movies.datasource
 
-import com.panostob.movieflix.data.movies.datasource.MoviesDataSource
+import com.panostob.movieflix.data.movies.datasource.MoviesRemoteDataSource
 import com.panostob.movieflix.data.movies.model.RemoteMovieDetailsResponse
 import com.panostob.movieflix.data.movies.model.RemoteMovieReviewsResponse
 import com.panostob.movieflix.data.movies.model.RemotePopularMoviesResponse
@@ -9,9 +9,10 @@ import com.panostob.movieflix.framework.movies.MoviesApi
 import com.panostob.movieflix.util.ext.requireNotNull
 import javax.inject.Inject
 
-class MoviesDataSourceImpl @Inject constructor(
-    val moviesApi: MoviesApi
-) : MoviesDataSource {
+class MoviesRemoteDataSourceImpl @Inject constructor(
+    val moviesApi: MoviesApi,
+//    val movieDatabase: MoviesDatabase
+) : MoviesRemoteDataSource {
 
     override suspend fun getPopularMovies(page: Int): RemotePopularMoviesResponse {
         return moviesApi.getPopularMovies(page).requireNotNull()
@@ -27,5 +28,9 @@ class MoviesDataSourceImpl @Inject constructor(
 
     override suspend fun getSimilarMovies(movieId: Int): RemoteSimilarMoviesResponse {
         return moviesApi.getSimilarMovies(movieId).requireNotNull()
+    }
+
+    override fun setFavoriteMovie(movieId: Int) {
+//        movieDao.setFavoriteMovie(movieId)
     }
 }

@@ -10,7 +10,9 @@ interface MoviesRepository {
 
     suspend fun getMovieDetails(movieId: Int): MovieDetails?
 
-    suspend fun getMovieReviews(movieId: Int): List<MovieReview>?
+    suspend fun getMovieReviews(movieId: Int): List<MovieReview>
 
-    suspend fun getSimilarMovies(movieId: Int): List<SimilarMovie>?
+    suspend fun getSimilarMovies(movieId: Int): List<SimilarMovie>
+
+    fun setFavoriteMovie(movieId: Int)
 }

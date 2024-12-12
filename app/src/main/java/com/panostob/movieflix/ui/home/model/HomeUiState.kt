@@ -9,9 +9,11 @@ import com.panostob.movieflix.util.navigation.NavigationRoute
 import kotlinx.coroutines.flow.Flow
 
 data class HomeUiState(
-    val popularMoviesFlow: Flow<PagingData<PopularMovie>>,
+    val popularMoviesFlow: Flow<PagingData<PopularMovieUiItem>>,
     val navigateToRoute: MutableState<NavigationRoute?> = mutableStateOf(null),
     val showNoInternetConnectionView: MutableState<Boolean> = mutableStateOf(false),
-    val onDismissConnectionView: () -> Unit,
-    val refresh: () -> Unit
+    val onMovieClick: (Int) -> Unit = {},
+    val onDismissConnectionView: () -> Unit = {},
+    val onFavoriteMovieClick: (Int) -> Unit = {},
+    val refresh: () -> Unit = {}
 )

@@ -14,7 +14,7 @@ import com.panostob.movieflix.R
 import com.panostob.movieflix.ui.theme.MovieFlixTheme
 
 @Composable
-internal fun SplashScreen() {
+fun SplashScreen() {
     SplashScreenContent()
 }
 

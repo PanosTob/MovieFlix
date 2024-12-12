@@ -56,7 +56,8 @@ fun AnimatedNoInternetConnectionItem(
             snackbarHostState.showSnackbar(noConnectionString)
         }
 
-        SnackbarHost(hostState = snackbarHostState) {
+        SnackbarHost(
+            hostState = snackbarHostState) {
             Box(
                 modifier = Modifier.fillMaxSize()
             ) {

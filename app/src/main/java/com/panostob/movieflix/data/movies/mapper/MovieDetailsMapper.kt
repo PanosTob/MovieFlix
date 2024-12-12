@@ -1,6 +1,7 @@
 package com.panostob.movieflix.data.movies.mapper
 
 import com.panostob.movieflix.BuildConfig
+import com.panostob.movieflix.data.movies.model.LocalPopularMovie
 import com.panostob.movieflix.data.movies.model.RemoteMovieDetailsResponse
 import com.panostob.movieflix.data.movies.model.RemoteMovieGenreItem
 import com.panostob.movieflix.domain.movies.entity.MovieDetails
@@ -10,7 +11,7 @@ import javax.inject.Inject
 class MovieDetailsMapper @Inject constructor(
     private val movieCastMapper: MovieCastMapper
 ) {
-    operator fun invoke(response: RemoteMovieDetailsResponse): MovieDetails? {
+    operator fun invoke(response: RemoteMovieDetailsResponse, localMovie: LocalPopularMovie?): MovieDetails? {
         if (response.id == null) return null
         return MovieDetails(
             id = response.id,
@@ -21,6 +22,7 @@ class MovieDetailsMapper @Inject constructor(
             starRating = response.starRating?.div(2),
             runtime = response.runtime ?: 0,
             description = response.description ?: "",
+            isFavorite = localMovie?.isFavorite ?: false,
             cast = movieCastMapper(response.credits?.cast),
         )
     }

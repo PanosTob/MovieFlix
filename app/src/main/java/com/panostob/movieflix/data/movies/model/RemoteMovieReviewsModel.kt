@@ -10,7 +10,7 @@ data class RemoteMovieReviewsResponse(
 
 @JsonClass(generateAdapter = true)
 data class RemoteMovieReviewItem(
-    val id: Int?,
+    val id: String?,
     val content: String?,
     val reviewUrl: String?,
     @Json(name = "author_details") val authorDetails: RemoteMovieAuthorItem?

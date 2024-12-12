@@ -14,8 +14,8 @@ class GetMovieDetailsUseCase @Inject constructor(
         return try {
             val movieDetails = repository.getMovieDetails(movieId)
 
-            getSimilarMoviesUseCase(movieId)?.let { movieDetails?.similarMovies?.addAll(it) }
-            getMovieReviewsUseCase(movieId)?.let { movieDetails?.reviews?.addAll(it) }
+            getSimilarMoviesUseCase(movieId)?.let { movieDetails?.similarMovies?.addAll(it.take(6)) }
+            getMovieReviewsUseCase(movieId)?.let { movieDetails?.reviews?.addAll(it.take(3)) }
 
             movieDetails
         } catch (ex: Exception) {

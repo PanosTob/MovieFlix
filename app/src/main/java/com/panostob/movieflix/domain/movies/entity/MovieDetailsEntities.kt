@@ -9,6 +9,7 @@ data class MovieDetails(
     val starRating: Double?,
     val runtime: Int?,
     val description: String,
+    val isFavorite: Boolean,
     val cast: List<MovieCastItem>,
     val reviews: MutableList<MovieReview> = mutableListOf(),
     val similarMovies: MutableList<SimilarMovie> = mutableListOf()
@@ -28,7 +29,7 @@ data class MovieCastItem(
 )
 
 data class MovieReview(
-    val id: Int,
+    val id: String,
     val content: String,
     val url: String,
     val authorDetails: MovieAuthor,

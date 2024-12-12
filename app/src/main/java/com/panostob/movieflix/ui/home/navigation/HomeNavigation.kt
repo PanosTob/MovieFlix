@@ -22,7 +22,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object HomeRoute : NavigationRoute()
 
-internal fun NavGraphBuilder.homeScreen(
+fun NavGraphBuilder.homeScreen(
     navigateToRoute: (NavigationRoute) -> Unit,
 ) {
     composable<HomeRoute> {
@@ -38,12 +38,12 @@ internal fun NavGraphBuilder.homeScreen(
             uiState = uiState,
             navigateToRoute = { route ->
                 navigateToRoute(route)
+                viewModel.resetRouteNavigation()
             }
         )
 
         HomeScreen(
-            uiState = uiState,
-            navigateToRoute = navigateToRoute,
+            uiState = uiState
         )
     }
 }
@@ -61,5 +61,4 @@ private fun HomeScreenSideEffects(
             .flowWithLifecycle(lifecycleOwner.lifecycle)
             .collectLatest { route -> navigateToRoute(route) }
     }
-
 }

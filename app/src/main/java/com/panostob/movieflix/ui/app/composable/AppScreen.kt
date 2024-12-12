@@ -14,7 +14,7 @@ import com.panostob.movieflix.ui.app.navigation.appNavGraph
 import com.panostob.movieflix.ui.theme.MovieFlixTheme
 
 @Composable
-internal fun AppScreen(
+fun AppScreen(
     navController: NavHostController,
     uiState: State<AppUiState>
 ) {
@@ -47,7 +47,7 @@ private fun AppContent(
 }
 
 @Composable
-internal fun AppNavHost(
+fun AppNavHost(
     navController: NavHostController
 ) {
     NavHost(

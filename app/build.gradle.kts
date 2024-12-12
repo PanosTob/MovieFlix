@@ -24,6 +24,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            isDebuggable = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -33,7 +34,7 @@ android {
         create("dev") {
             dimension = "env"
             buildConfigField("String", "TMDB_JSON_API_BASE_URL", "\"https://api.themoviedb.org/3/\"")
-            buildConfigField("String", "TMDB_JSON_API_IMAGE_URL", "\"https://image.tmdb.org/t/p/w300\"")
+            buildConfigField("String", "TMDB_JSON_API_IMAGE_URL", "\"https://image.tmdb.org/t/p/original\"")
         }
     }
     compileOptions {
@@ -60,6 +61,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.appcompat.resources)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

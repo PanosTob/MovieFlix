@@ -7,15 +7,16 @@ import com.panostob.movieflix.data.movies.model.RemoteSimilarMoviesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MoviesApi {
 
-    @GET("movie/popular?language=en-US&page={page}")
+    @GET("movie/popular?language=en-US")
     suspend fun getPopularMovies(
-        @Path("page") page: Int
+        @Query("page") page: Int
     ): Response<RemotePopularMoviesResponse>
 
-    @GET("movie/{movie_id}?language=en-US&append_to_response=credits,reviews,similar")
+    @GET("movie/{movie_id}?language=en-US&append_to_response=credits")
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int
     ): Response<RemoteMovieDetailsResponse>
