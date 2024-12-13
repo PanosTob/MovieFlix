@@ -55,7 +55,7 @@ import com.panostob.movieflix.util.composable.rememberImageRequester
 fun PopularMovieItems(
     popularMovies: LazyPagingItems<PopularMovieUiItem>,
     onMovieItemClick: (Int) -> Unit,
-    onFavoriteMovieClick: (Int) -> Unit
+    onFavoriteMovieClick: (PopularMovieUiItem) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -74,7 +74,7 @@ fun PopularMovieItems(
                         .clip(MaterialTheme.shapes.medium)
                         .clickableWithLifecycle { onMovieItemClick(movie.id) },
                     movie = movie,
-                    onFavoriteMovieClick = onFavoriteMovieClick
+                    onFavoriteMovieClick = { onFavoriteMovieClick(it) }
                 )
             }
         }
@@ -119,7 +119,7 @@ private fun LazyListScope.popularMoviesAppend(
 fun PopularMovieItem(
     modifier: Modifier,
     movie: PopularMovieUiItem,
-    onFavoriteMovieClick: (Int) -> Unit
+    onFavoriteMovieClick: (PopularMovieUiItem) -> Unit
 ) {
     Box(
         modifier
@@ -159,7 +159,9 @@ fun PopularMovieItem(
                     modifier = Modifier
                         .fillMaxHeight()
                         .aspectRatio(1f, true)
-                        .noRippleClickable { onFavoriteMovieClick(movie.id) },
+                        .noRippleClickable {
+                            onFavoriteMovieClick(movie)
+                        },
                     painter = painterResource(if (movie.isFavorite.value) R.drawable.ic_favorite else R.drawable.ic_not_favorite),
                     contentDescription = ""
                 )

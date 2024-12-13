@@ -13,7 +13,6 @@ data class HomeUiState(
     val navigateToRoute: MutableState<NavigationRoute?> = mutableStateOf(null),
     val showNoInternetConnectionView: MutableState<Boolean> = mutableStateOf(false),
     val onMovieClick: (Int) -> Unit = {},
-    val onDismissConnectionView: () -> Unit = {},
-    val onFavoriteMovieClick: (Int) -> Unit = {},
+    val onFavoriteMovieClick: (PopularMovieUiItem) -> Unit = {},
     val refresh: () -> Unit = {}
 )

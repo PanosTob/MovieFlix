@@ -1,12 +1,16 @@
 package com.panostob.movieflix.di.movies
 
 import com.panostob.movieflix.BuildConfig
-import com.panostob.movieflix.data.movies.datasource.MoviesRemoteDataSource
+import com.panostob.movieflix.data.movies.datasource.local.MoviesLocalDataSource
+import com.panostob.movieflix.data.movies.datasource.remote.MoviesRemoteDataSource
 import com.panostob.movieflix.data.movies.repository.MoviesRepositoryImpl
 import com.panostob.movieflix.di.qualifier.MoviesOkHttpClient
 import com.panostob.movieflix.domain.movies.repository.MoviesRepository
 import com.panostob.movieflix.framework.movies.MoviesApi
-import com.panostob.movieflix.framework.movies.datasource.MoviesRemoteDataSourceImpl
+import com.panostob.movieflix.framework.movies.datasource.local.AppDatabase
+import com.panostob.movieflix.framework.movies.datasource.local.MoviesLocalDataSourceImpl
+import com.panostob.movieflix.framework.movies.datasource.local.dao.MovieDao
+import com.panostob.movieflix.framework.movies.datasource.remote.MoviesRemoteDataSourceImpl
 import com.panostob.movieflix.util.network.interceptor.MoviesApiInterceptor
 import dagger.Binds
 import dagger.Module
@@ -60,6 +64,12 @@ object MoviesModule {
             .build()
             .create(MoviesApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideMovieDao(appDatabase: AppDatabase): MovieDao {
+        return appDatabase.movieDao()
+    }
 }
 
 @Module
@@ -70,5 +80,8 @@ interface MoviesBindsModule {
     fun bindMoviesRepositoryImpl(repository: MoviesRepositoryImpl): MoviesRepository
 
     @Binds
-    fun bindMoviesDataSourceImpl(dataSource: MoviesRemoteDataSourceImpl): MoviesRemoteDataSource
+    fun bindMoviesRemoteDataSourceImpl(dataSource: MoviesRemoteDataSourceImpl): MoviesRemoteDataSource
+
+    @Binds
+    fun bindMoviesLocalDataSourceImpl(dataSource: MoviesLocalDataSourceImpl): MoviesLocalDataSource
 }

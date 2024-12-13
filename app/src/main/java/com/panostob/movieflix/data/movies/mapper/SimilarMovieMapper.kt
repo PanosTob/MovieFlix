@@ -1,7 +1,7 @@
 package com.panostob.movieflix.data.movies.mapper
 
 import com.panostob.movieflix.BuildConfig
-import com.panostob.movieflix.data.movies.model.RemoteSimilarMoviesResponse
+import com.panostob.movieflix.data.movies.model.remote.RemoteSimilarMoviesResponse
 import com.panostob.movieflix.domain.movies.entity.SimilarMovie
 import javax.inject.Inject
 

@@ -14,5 +14,7 @@ interface MoviesRepository {
 
     suspend fun getSimilarMovies(movieId: Int): List<SimilarMovie>
 
-    fun setFavoriteMovie(movieId: Int)
+    suspend fun setFavoriteMovie(movieId: Int)
+
+    suspend fun deleteFavoriteMovie(movieId: Int)
 }

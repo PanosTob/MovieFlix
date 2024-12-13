@@ -2,12 +2,16 @@ package com.panostob.movieflix.ui.moviedetails.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.toRoute
+import com.panostob.movieflix.domain.movies.entity.UpdateDatasourceResult
 import com.panostob.movieflix.ui.base.BaseViewModel
+import com.panostob.movieflix.ui.home.model.PopularMovieUiItem
 import com.panostob.movieflix.ui.moviedetails.mapper.MovieDetailsUiMapper
+import com.panostob.movieflix.ui.moviedetails.model.MovieDetailsUiItem
 import com.panostob.movieflix.ui.moviedetails.model.MovieDetailsUiState
 import com.panostob.movieflix.ui.moviedetails.navigation.MovieDetailsRoute
+import com.panostob.movieflix.usecases.DeleteFavoriteMovieUseCase
 import com.panostob.movieflix.usecases.GetMovieDetailsUseCase
-import com.panostob.movieflix.usecases.SetFavoriteMovieUseCase
+import com.panostob.movieflix.usecases.SaveFavoriteMovieUseCase
 import com.panostob.movieflix.util.navigation.NavigationRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieDetailsViewModel @Inject constructor(
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
-    private val setFavoriteMovieUseCase: SetFavoriteMovieUseCase,
+    private val saveFavoriteMovieUseCase: SaveFavoriteMovieUseCase,
+    private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase,
     private val movieDetailsUiMapper: MovieDetailsUiMapper,
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
@@ -51,8 +56,13 @@ class MovieDetailsViewModel @Inject constructor(
         }
     }
 
-    private fun onFavoriteMovieClick(movieId: Int) {
-        setFavoriteMovieUseCase(movieId)
+    private fun onFavoriteMovieClick(movie: MovieDetailsUiItem) {
+        launch {
+            val result = if (!movie.isFavorite.value) saveFavoriteMovieUseCase(movie.id) else deleteFavoriteMovieUseCase(movie.id)
+            if (result is UpdateDatasourceResult.Success) {
+                movie.isFavorite.value = !movie.isFavorite.value
+            }
+        }
     }
 
     fun navigateToRoute(route: NavigationRoute) {
@@ -69,6 +79,14 @@ class MovieDetailsViewModel @Inject constructor(
 
     private fun onSimilarMovieClick(movieId: Int) {
         setupMovieDetails(movieId)
+    }
+
+    fun onNetworkConnected() {
+        _uiState.value.showNoInternetConnectionView.value = false
+    }
+
+    fun onNetworkDisconnected() {
+        _uiState.value.showNoInternetConnectionView.value = true
     }
 
 }

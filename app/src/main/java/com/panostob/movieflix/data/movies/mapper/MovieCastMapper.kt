@@ -1,8 +1,7 @@
 package com.panostob.movieflix.data.movies.mapper
 
-import android.R.attr.order
 import com.panostob.movieflix.BuildConfig
-import com.panostob.movieflix.data.movies.model.RemoteMovieCastItem
+import com.panostob.movieflix.data.movies.model.remote.RemoteMovieCastItem
 import com.panostob.movieflix.domain.movies.entity.MovieCastItem
 import javax.inject.Inject
 

@@ -1,10 +1,8 @@
 package com.panostob.movieflix.data.movies.mapper
 
-import android.R.attr.rating
 import com.panostob.movieflix.BuildConfig
-import com.panostob.movieflix.data.movies.model.RemoteMovieAuthorItem
-import com.panostob.movieflix.data.movies.model.RemoteMovieReviewItem
-import com.panostob.movieflix.data.movies.model.RemoteMovieReviewsResponse
+import com.panostob.movieflix.data.movies.model.remote.RemoteMovieAuthorItem
+import com.panostob.movieflix.data.movies.model.remote.RemoteMovieReviewsResponse
 import com.panostob.movieflix.domain.movies.entity.MovieAuthor
 import com.panostob.movieflix.domain.movies.entity.MovieReview
 import javax.inject.Inject

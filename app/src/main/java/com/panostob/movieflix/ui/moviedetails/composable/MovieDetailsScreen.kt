@@ -44,6 +44,7 @@ import com.panostob.movieflix.ui.home.composable.MovieStarRating
 import com.panostob.movieflix.ui.moviedetails.model.MovieDetailsUiItem
 import com.panostob.movieflix.ui.moviedetails.model.MovieDetailsUiState
 import com.panostob.movieflix.ui.theme.MovieFlixTheme
+import com.panostob.movieflix.util.composable.NoInternetConnectionItem
 import com.panostob.movieflix.util.composable.SpacingDefault_16dp
 import com.panostob.movieflix.util.composable.SpacingDouble_32dp
 import com.panostob.movieflix.util.composable.SpacingHalf_8dp
@@ -76,6 +77,10 @@ fun MovieDetailsScreen(
             onSimilarMovieClick = { successState.onSimilarMovieClick(it) }
         )
     }
+
+    NoInternetConnectionItem(
+        showInternetDialog = uiState.value.showNoInternetConnectionView
+    )
 }
 
 @Composable
@@ -102,7 +107,7 @@ private fun MovieDetailsScreenSideEffects(
 fun MovieContent(
     movie: MovieDetailsUiItem,
     scrollState: ScrollState,
-    onFavoriteMovieClick: (Int) -> Unit,
+    onFavoriteMovieClick: (MovieDetailsUiItem) -> Unit,
     onSimilarMovieClick: (Int) -> Unit
 ) {
     Column(
@@ -134,14 +139,14 @@ fun MovieContent(
                 verticalArrangement = Arrangement.spacedBy(SpacingDefault_16dp)
             ) {
                 Text(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(0.8f),
                     text = movie.title,
                     color = Color.Black,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(0.8f),
                     text = movie.genres,
                     color = Color.Gray,
                     style = MaterialTheme.typography.titleSmall
@@ -265,7 +270,7 @@ fun MovieContent(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .size(SpacingDouble_32dp)
-                    .noRippleClickable { onFavoriteMovieClick(movie.id) },
+                    .noRippleClickable { onFavoriteMovieClick(movie) },
                 painter = painterResource(if (movie.isFavorite.value) R.drawable.ic_favorite else R.drawable.ic_not_favorite_black),
                 contentDescription = ""
             )

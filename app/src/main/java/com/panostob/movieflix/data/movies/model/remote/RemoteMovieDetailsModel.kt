@@ -1,4 +1,4 @@
-package com.panostob.movieflix.data.movies.model
+package com.panostob.movieflix.data.movies.model.remote
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

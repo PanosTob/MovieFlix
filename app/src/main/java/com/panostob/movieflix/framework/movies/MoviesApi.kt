@@ -1,9 +1,9 @@
 package com.panostob.movieflix.framework.movies
 
-import com.panostob.movieflix.data.movies.model.RemoteMovieDetailsResponse
-import com.panostob.movieflix.data.movies.model.RemoteMovieReviewsResponse
-import com.panostob.movieflix.data.movies.model.RemotePopularMoviesResponse
-import com.panostob.movieflix.data.movies.model.RemoteSimilarMoviesResponse
+import com.panostob.movieflix.data.movies.model.remote.RemoteMovieDetailsResponse
+import com.panostob.movieflix.data.movies.model.remote.RemoteMovieReviewsResponse
+import com.panostob.movieflix.data.movies.model.remote.RemotePopularMoviesResponse
+import com.panostob.movieflix.data.movies.model.remote.RemoteSimilarMoviesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

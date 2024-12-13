@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.jetbrains.serialization)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidx.room)
     alias(libs.plugins.kotlin.compose)
 }
 
@@ -49,6 +50,10 @@ android {
         compose = true
         buildConfig = true
     }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -91,6 +96,14 @@ dependencies {
     //Network
     implementation(libs.squareup.moshi)
     ksp(libs.squareup.moshi.codegen)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
+
 
     implementation(libs.squareup.okhttp3)
     implementation(libs.squareup.okhttp3.logging)
